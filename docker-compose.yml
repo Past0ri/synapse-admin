@@ -2,13 +2,13 @@ services:
   synapse-admin:
     container_name: synapse-admin
     hostname: synapse-admin
-    image: awesometechnologies/synapse-admin:latest
-    # build:
-    #   context: .
+    image: synapse-admin:local
+    build:
+      context: .
 
     # to use the docker-compose as standalone without a local repo clone,
     # replace the context definition with this:
-    # context: https://github.com/Awesome-Technologies/synapse-admin.git
+    # context: https://github.com/<your-user-or-org>/synapse-admin.git
 
     #  args:
     #    - BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
