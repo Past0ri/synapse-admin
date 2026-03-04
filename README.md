@@ -1,6 +1,4 @@
 [![GitHub license](https://img.shields.io/github/license/Past0ri/synapse-admin)](https://github.com/Past0ri/synapse-admin/blob/master/LICENSE)
-[![build-test](https://github.com/Past0ri/synapse-admin/actions/workflows/build-test.yml/badge.svg)](https://github.com/Past0ri/synapse-admin/actions/workflows/build-test.yml)
-[![github-release](https://github.com/Past0ri/synapse-admin/actions/workflows/github-release.yml/badge.svg)](https://github.com/Past0ri/synapse-admin/releases)
 
 # Synapse admin ui
 
