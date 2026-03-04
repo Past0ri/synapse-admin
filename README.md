@@ -1,4 +1,4 @@
-[![GitHub license](https://img.shields.io/github/license/Past0ri/synapse-admin)](https://github.com/Past0ri/synapse-admin/blob/HEAD/LICENSE)
+[![License](https://img.shields.io/github/license/Past0ri/synapse-admin.svg)](https://github.com/Past0ri/synapse-admin/blob/master/LICENSE)
 
 # Synapse admin ui
 
