@@ -5,17 +5,6 @@
 This project is built using [react-admin](https://marmelab.com/react-admin/).
 Original upstream repository: [Awesome-Technologies/synapse-admin](https://github.com/Awesome-Technologies/synapse-admin).
 
-## Usage
-
-### Supported Synapse
-
-It needs at least [Synapse](https://github.com/element-hq/synapse) v1.93.0 for all functions to work as expected!
-
-You get your server version with the request `/_synapse/admin/v1/server_version`.
-See also [Synapse version API](https://element-hq.github.io/synapse/latest/admin_api/version_api.html).
-
-After entering the URL on the login page of synapse-admin the server version appears below the input field.
-
 ### Prerequisites
 
 You need access to the following endpoints:
@@ -24,43 +13,6 @@ You need access to the following endpoints:
 - `/_synapse/admin`
 
 See also [Synapse administration endpoints](https://element-hq.github.io/synapse/latest/reverse_proxy.html#synapse-administration-endpoints)
-
-### Use without install
-
-You can use the current version of Synapse Admin without own installation direct
-via [GitHub](https://github.com/Past0ri/synapse-admin).
-
-**Note:**
-If you want to use the deployment, you have to make sure that the admin endpoints (`/_synapse/admin`) are accessible for your browser.
-**Remember: You have no need to expose these endpoints to the internet but to your network.**
-If you want your own deployment, follow the [Step-By-Step Install Guide](#step-by-step-install) below.
-
-### Step-By-Step install
-
-You have three options:
-
-1.  [Download the tarball and serve with any webserver](#steps-for-1)
-2.  [Download the source code from github and run using nodejs](#steps-for-2)
-3.  [Run the Docker container](#steps-for-3)
-
-#### Steps for 1)
-
-- make sure you have a webserver installed that can serve static files (any webserver like nginx or apache will do)
-- configure a vhost for synapse admin on your webserver
-- download the .tar.gz from the latest release: https://github.com/Past0ri/synapse-admin/releases/latest
-- unpack the .tar.gz
-- move or symlink the `synapse-admin-x.x.x` into your vhosts root dir
-- open the url of the vhost in your browser
-
-#### Steps for 2)
-
-- make sure you have installed the following: git, npm, nodejs
-- download the source code: `git clone https://github.com/Past0ri/synapse-admin.git`
-- change into downloaded directory: `cd synapse-admin`
-- download dependencies: `npm install`
-- start web server: `npm start`
-
-#### Steps for 3)
 
 - run the Docker container from your local build: `docker compose build && docker compose up -d` or use the [docker-compose.yml](docker-compose.yml): `docker-compose up -d`
 
