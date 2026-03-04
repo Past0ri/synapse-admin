@@ -1,4 +1,4 @@
-[![GitHub license](https://img.shields.io/github/license/Past0ri/synapse-admin)](https://github.com/Past0ri/synapse-admin/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Past0ri/synapse-admin)](https://github.com/Past0ri/synapse-admin/blob/HEAD/LICENSE)
 
 # Synapse admin ui
 
@@ -135,32 +135,6 @@ If you want to build your own Docker container, use the `BASE_PATH` argument.
 
 We do not support directly changing the path where Synapse-Admin is served in the pre-built Docker container. Instead please use a reverse proxy if you need to move Synapse-Admin to a different base path. If you want to serve multiple applications with different paths on the same domain, you need a reverse proxy anyway.
 
-Example for Traefik:
-
-`docker-compose.yml`
-
-```yml
-services:
-  traefik:
-    image: traefik:mimolette
-    restart: unless-stopped
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-
-  synapse-admin:
-    image: synapse-admin:local
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.synapse-admin.rule=Host(`example.com`)&&PathPrefix(`/admin`)"
-      - "traefik.http.routers.synapse-admin.middlewares=admin,admin_path"
-      - "traefik.http.middlewares.admin.redirectregex.regex=^(.*)/admin/?"
-      - "traefik.http.middlewares.admin.redirectregex.replacement=$${1}/admin/"
-      - "traefik.http.middlewares.admin_path.stripprefix.prefixes=/admin"
-```
 
 ## Development
 
