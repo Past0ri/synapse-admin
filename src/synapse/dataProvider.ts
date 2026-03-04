@@ -9,12 +9,12 @@ import {
   SortPayload,
   fetchUtils
 } from "react-admin";
+
 import storage from "../storage";
 
 // Adds the access token to all requests
 const jsonClient = (url: string, options: Options = {}) => {
   const token = storage.getItem("access_token");
-  console.log("httpClient " + url);
   if (token != null) {
     options.user = {
       authenticated: true,
@@ -28,7 +28,6 @@ const mxcUrlToHttp = (mxcUrl: string) => {
   const homeserver = storage.getItem("base_url");
   const re = /^mxc:\/\/([^/]+)\/(\w+)/;
   const ret = re.exec(mxcUrl);
-  console.log("mxcClient " + ret);
   if (ret == null) return null;
   const serverName = ret[1];
   const mediaId = ret[2];
@@ -497,7 +496,6 @@ function getSearchOrder(order: "ASC" | "DESC") {
 
 const dataProvider: SynapseDataProvider = {
   getList: async (resource, params) => {
-    console.log("getList " + resource);
     const { user_id, name, guests, deactivated, locked, search_term, destination, valid } = params.filter;
     const { page, perPage } = params.pagination as PaginationPayload;
     const { field, order } = params.sort as SortPayload;
@@ -532,7 +530,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   getOne: async (resource, params) => {
-    console.log("getOne " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 
@@ -544,7 +541,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   getMany: async (resource, params) => {
-    console.log("getMany " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homerserver not set");
 
@@ -559,7 +555,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   getManyReference: async (resource, params) => {
-    console.log("getManyReference " + resource);
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const from = (page - 1) * perPage;
@@ -586,7 +581,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   update: async (resource, params) => {
-    console.log("update " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 
@@ -601,7 +595,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   updateMany: async (resource, params) => {
-    console.log("updateMany " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 
@@ -618,7 +611,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   create: async (resource, params) => {
-    console.log("create " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 
@@ -635,7 +627,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   createMany: async (resource: string, params: { ids: Identifier[]; data: RaRecord }) => {
-    console.log("createMany " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 
@@ -657,7 +648,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   delete: async (resource, params) => {
-    console.log("delete " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 
@@ -682,7 +672,6 @@ const dataProvider: SynapseDataProvider = {
   },
 
   deleteMany: async (resource, params) => {
-    console.log("deleteMany " + resource);
     const homeserver = storage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) throw Error("Homeserver not set");
 

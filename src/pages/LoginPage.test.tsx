@@ -1,6 +1,5 @@
-import polyglotI18nProvider from "ra-i18n-polyglot";
-
 import { render, screen } from "@testing-library/react";
+import polyglotI18nProvider from "ra-i18n-polyglot";
 import { AdminContext } from "react-admin";
 
 import LoginPage from "./LoginPage";

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 
 import LockIcon from "@mui/icons-material/Lock";
 import { Avatar, Box, Button, Card, CardActions, CircularProgress, MenuItem, Select, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useState, useEffect } from "react";
 import {
   Form,
   FormDataConsumer,
@@ -19,6 +19,7 @@ import {
 import { useFormContext } from "react-hook-form";
 
 import { useAppContext } from "../AppContext";
+import storage from "../storage";
 import {
   getServerVersion,
   getSupportedFeatures,
@@ -27,7 +28,6 @@ import {
   isValidBaseUrl,
   splitMxid,
 } from "../synapse/synapse";
-import storage from "../storage";
 
 const FormBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -101,7 +101,6 @@ const LoginPage = () => {
 
   if (loginToken) {
     const ssoToken = loginToken[1];
-    console.log("SSO token is", ssoToken);
     // Prevent further requests
     window.history.replaceState({}, "", window.location.href.replace(loginToken[0], "#").split("#")[0]);
     const baseUrl = storage.getItem("sso_base_url");
@@ -113,9 +112,6 @@ const LoginPage = () => {
         password: null,
         loginToken: ssoToken,
       };
-      console.log("Base URL is:", baseUrl);
-      console.log("SSO Token is:", ssoToken);
-      console.log("Let's try token login...");
       login(auth).catch(error => {
         alert(
           typeof error === "string"

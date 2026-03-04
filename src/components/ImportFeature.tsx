@@ -1,6 +1,3 @@
-import { parse as parseCsv, unparse as unparseCsv, ParseResult } from "papaparse";
-import { ChangeEvent, useState } from "react";
-
 import {
   Button,
   Card,
@@ -12,7 +9,9 @@ import {
   FormControlLabel,
   NativeSelect,
 } from "@mui/material";
+import { parse as parseCsv, unparse as unparseCsv, ParseResult } from "papaparse";
 import { DataProvider, useTranslate } from "ra-core";
+import { ChangeEvent, useState } from "react";
 import { useDataProvider, useNotify, RaRecord, Title } from "react-admin";
 
 import { generateRandomMxId, generateRandomPassword } from "../synapse/synapse";
@@ -360,7 +359,6 @@ const FilePicker = () => {
 
   const downloadSkippedRecords = () => {
     const element = document.createElement("a");
-    console.log(skippedRecords);
     const file = new Blob([skippedRecords], {
       type: "text/comma-separated-values",
     });

@@ -1,6 +1,5 @@
-import { get } from "lodash";
-
 import { Avatar } from "@mui/material";
+import { get } from "lodash";
 import { useRecordContext } from "react-admin";
 
 const AvatarField = ({ source, ...rest }) => {

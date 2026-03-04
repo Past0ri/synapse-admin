@@ -1,4 +1,5 @@
 import RoomDirectoryIcon from "@mui/icons-material/FolderShared";
+import { useMutation } from "@tanstack/react-query";
 import {
   BooleanField,
   BulkDeleteButton,
@@ -25,7 +26,6 @@ import {
   useRefresh,
   useUnselectAll,
 } from "react-admin";
-import { useMutation } from "@tanstack/react-query";
 
 import AvatarField from "../components/AvatarField";
 

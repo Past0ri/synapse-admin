@@ -1,5 +1,3 @@
-import { get } from "lodash";
-import { useState } from "react";
 
 import BlockIcon from "@mui/icons-material/Block";
 import IconCancel from "@mui/icons-material/Cancel";
@@ -10,6 +8,9 @@ import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Box, Dialog, DialogContent, DialogContentText, DialogTitle, Tooltip } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
+import { useMutation } from "@tanstack/react-query";
+import { get } from "lodash";
+import { useState } from "react";
 import {
   BooleanInput,
   Button,
@@ -28,13 +29,12 @@ import {
   useRefresh,
   useTranslate,
 } from "react-admin";
-import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 import { dateParser } from "./date";
+import storage from "../storage";
 import { DeleteMediaParams, SynapseDataProvider } from "../synapse/dataProvider";
 import { getMediaUrl } from "../synapse/synapse";
-import storage from "../storage";
 
 const DeleteMediaDialog = ({ open, onClose, onSubmit }) => {
   const translate = useTranslate();

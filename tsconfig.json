@@ -2,8 +2,8 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "ESNext"                        /* Specify ECMAScript target version */,
-    "module": "ESNext"                        /* Specify module code generation */,
+    "target": "ES6"                        /* Specify ECMAScript target version */,
+    "module": "ES6"                        /* Specify module code generation */,
     "lib": ["DOM", "DOM.Iterable", "ESNext"]  /* Specify library files to be included in the compilation. */,
     "allowJs": false                          /* Allow javascript files to be compiled. */,
     // "checkJs": true,                       /* Report errors in .js files. */

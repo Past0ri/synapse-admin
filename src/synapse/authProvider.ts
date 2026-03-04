@@ -15,7 +15,6 @@ const authProvider: AuthProvider = {
     password: string;
     loginToken: string;
   }) => {
-    console.log("login ");
     const options: Options = {
       method: "POST",
       body: JSON.stringify(
@@ -59,8 +58,6 @@ const authProvider: AuthProvider = {
   },
   // called when the user clicks on the logout button
   logout: async () => {
-    console.log("logout");
-
     const logout_api_url = storage.getItem("base_url") + "/_matrix/client/r0/logout";
     const access_token = storage.getItem("access_token");
 
@@ -79,7 +76,6 @@ const authProvider: AuthProvider = {
   },
   // called when the API returns an error
   checkError: ({ status }: { status: number }) => {
-    console.log("checkError " + status);
     if (status === 401 || status === 403) {
       return Promise.reject();
     }
@@ -88,7 +84,6 @@ const authProvider: AuthProvider = {
   // called when the user navigates to a new location, to check for authentication
   checkAuth: () => {
     const access_token = storage.getItem("access_token");
-    console.log("checkAuth " + access_token);
     return typeof access_token === "string" ? Promise.resolve() : Promise.reject();
   },
   // called when the user navigates to a new location, to check for permissions / roles

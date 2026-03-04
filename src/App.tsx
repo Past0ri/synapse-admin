@@ -1,6 +1,6 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { merge } from "lodash";
 import polyglotI18nProvider from "ra-i18n-polyglot";
-
 import { Admin, CustomRoutes, Resource, resolveBrowserLocale } from "react-admin";
 import { Route } from "react-router-dom";
 
@@ -17,11 +17,11 @@ import registrationToken from "./resources/registration_tokens";
 import reports from "./resources/reports";
 import roomDirectory from "./resources/room_directory";
 import rooms from "./resources/rooms";
+import serverStatus from "./resources/server_status";
 import userMediaStats from "./resources/user_media_statistics";
 import users from "./resources/users";
 import authProvider from "./synapse/authProvider";
 import dataProvider from "./synapse/dataProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // TODO: Can we use lazy loading together with browser locale?
 const messages = {
@@ -68,6 +68,7 @@ const App = () => (
       <Resource {...roomDirectory} />
       <Resource {...destinations} />
       <Resource {...registrationToken} />
+      <Resource {...serverStatus} />
       <Resource name="connections" />
       <Resource name="devices" />
       <Resource name="room_members" />

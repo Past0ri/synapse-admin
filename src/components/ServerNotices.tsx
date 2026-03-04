@@ -1,8 +1,9 @@
-import { useState } from "react";
 
 import IconCancel from "@mui/icons-material/Cancel";
 import MessageIcon from "@mui/icons-material/Message";
 import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import {
   Button,
   RaRecord,
@@ -20,7 +21,6 @@ import {
   useTranslate,
   useUnselectAll,
 } from "react-admin";
-import { useMutation } from "@tanstack/react-query";
 
 const ServerNoticeDialog = ({ open, onClose, onSubmit }) => {
   const translate = useTranslate();

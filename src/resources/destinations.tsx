@@ -1,11 +1,12 @@
-import { get } from "lodash";
-import { MouseEvent } from "react";
 
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import DestinationsIcon from "@mui/icons-material/CloudQueue";
 import FolderSharedIcon from "@mui/icons-material/FolderShared";
 import ViewListIcon from "@mui/icons-material/ViewList";
+import { lighten, useTheme } from '@mui/material';
 import { blue } from "@mui/material/colors";
+import { get } from "lodash";
+import { MouseEvent } from "react";
 import {
   Button,
   Datagrid,
@@ -33,7 +34,6 @@ import {
 } from "react-admin";
 
 import { DATE_FORMAT } from "../components/date";
-import { lighten, useTheme } from '@mui/material';
 
 const DestinationPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />;
 

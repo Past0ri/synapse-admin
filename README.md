@@ -58,11 +58,11 @@ You have three options:
 
 #### Steps for 2)
 
-- make sure you have installed the following: git, yarn, nodejs
+- make sure you have installed the following: git, npm, nodejs
 - download the source code: `git clone https://github.com/Awesome-Technologies/synapse-admin.git`
 - change into downloaded directory: `cd synapse-admin`
-- download dependencies: `yarn install`
-- start web server: `yarn start`
+- download dependencies: `npm install`
+- start web server: `npm start`
 
 #### Steps for 3)
 
@@ -119,11 +119,21 @@ services:
     ...
 ```
 
+### Local-only testing overrides
+
+For local development, you can override `public/config.json` without committing private IPs or domains.
+
+- copy `public/config.local.example.json` to `public/config.local.json`
+- edit `public/config.local.json` with your local values (for example `restrictBaseUrl`)
+- `public/config.local.json` is gitignored by default
+
+At runtime, `config.local.json` overrides values from `config.json`.
+
 ### Serving Synapse-Admin on a different path
 
 The path prefix where synapse-admin is served can only be changed during the build step.
 
-If you downloaded the source code, use `yarn build --base=/my-prefix` to set a path prefix.
+If you downloaded the source code, use `npm run build -- --base=/my-prefix` to set a path prefix.
 
 If you want to build your own Docker container, use the `BASE_PATH` argument.
 
@@ -162,7 +172,6 @@ services:
 
 ## Development
 
-- See https://yarnpkg.com/getting-started/editor-sdks how to setup your IDE
-- Use `yarn lint` to run all style and linter checks
-- Use `yarn test` to run all unit tests
-- Use `yarn fix` to fix the coding style
+- Use `npm run lint` to run all style and linter checks
+- Use `npm test` to run all unit tests
+- Use `npm run fix` to fix the coding style
