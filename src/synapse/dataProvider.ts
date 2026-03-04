@@ -26,12 +26,17 @@ const jsonClient = (url: string, options: Options = {}) => {
 
 const mxcUrlToHttp = (mxcUrl: string) => {
   const homeserver = storage.getItem("base_url");
-  const re = /^mxc:\/\/([^/]+)\/(\w+)/;
+  const re = /^mxc:\/\/([^/]+)\/([^?#/]+)/;
   const ret = re.exec(mxcUrl);
   if (ret == null) return null;
-  const serverName = ret[1];
-  const mediaId = ret[2];
-  return `${homeserver}/_matrix/media/r0/thumbnail/${serverName}/${mediaId}?width=24&height=24&method=scale`;
+  const serverName = encodeURIComponent(ret[1]);
+  const mediaId = encodeURIComponent(ret[2]);
+  const params = new URLSearchParams({
+    width: "24",
+    height: "24",
+    method: "scale",
+  });
+  return `${homeserver}/_matrix/media/r0/thumbnail/${serverName}/${mediaId}?${params.toString()}`;
 };
 
 interface Room {

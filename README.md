@@ -76,7 +76,7 @@ You have three options:
       container_name: synapse-admin
       hostname: synapse-admin
       build:
-        context: https://github.com/Awesome-Technologies/synapse-admin.git
+        context: https://github.com/Past0ri/synapse-admin.git
         args:
           - BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
         #   - NODE_OPTIONS="--max_old_space_size=1024"

@@ -1,10 +1,12 @@
+import { Box } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { merge } from "lodash";
 import polyglotI18nProvider from "ra-i18n-polyglot";
-import { Admin, CustomRoutes, Resource, resolveBrowserLocale } from "react-admin";
+import { AppBar as RaAppBar, Admin, CustomRoutes, Layout, Resource, resolveBrowserLocale } from "react-admin";
 import { Route } from "react-router-dom";
 
 import { ImportFeature } from "./components/ImportFeature";
+import ServerHealthIndicator from "./components/ServerHealthIndicator";
 import germanMessages from "./i18n/de";
 import englishMessages from "./i18n/en";
 import frenchMessages from "./i18n/fr";
@@ -48,11 +50,22 @@ const i18nProvider = polyglotI18nProvider(
 
 const queryClient = new QueryClient();
 
+const CustomAppBar = () => (
+  <RaAppBar>
+    <Box sx={{ marginLeft: "auto" }}>
+      <ServerHealthIndicator />
+    </Box>
+  </RaAppBar>
+);
+
+const CustomLayout = props => <Layout {...props} appBar={CustomAppBar} />;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <Admin
       disableTelemetry
       requireAuth
+      layout={CustomLayout}
       loginPage={LoginPage}
       authProvider={authProvider}
       dataProvider={dataProvider}
@@ -61,6 +74,7 @@ const App = () => (
       <CustomRoutes>
         <Route path="/import_users" element={<ImportFeature />} />
       </CustomRoutes>
+      <Resource {...serverStatus} />
       <Resource {...users} />
       <Resource {...rooms} />
       <Resource {...userMediaStats} />
@@ -68,7 +82,6 @@ const App = () => (
       <Resource {...roomDirectory} />
       <Resource {...destinations} />
       <Resource {...registrationToken} />
-      <Resource {...serverStatus} />
       <Resource name="connections" />
       <Resource name="devices" />
       <Resource name="room_members" />

@@ -16,6 +16,12 @@ const configLocalJSON = "config.local.json";
 // load config.json from relative path if import.meta.env.BASE_URL is None or empty
 const configJSONUrl = baseUrl ? `${baseUrl.replace(/\/$/, "")}/${configJSON}` : configJSON;
 const configLocalJSONUrl = baseUrl ? `${baseUrl.replace(/\/$/, "")}/${configLocalJSON}` : configLocalJSON;
+const appVersion = (globalThis as { __SYNAPSE_ADMIN_VERSION__?: string }).__SYNAPSE_ADMIN_VERSION__ ?? "";
+
+const versionEl = document.getElementById("version");
+if (versionEl) {
+  versionEl.textContent = appVersion;
+}
 
 const loadConfig = async (): Promise<AppConfig> => {
   const baseConfig = await fetch(configJSONUrl).then(res => res.json());
