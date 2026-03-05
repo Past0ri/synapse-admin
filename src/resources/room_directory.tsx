@@ -70,6 +70,21 @@ export const RoomDirectoryBulkPublishButton = (props: ButtonProps) => {
   const refresh = useRefresh();
   const unselectAllRooms = useUnselectAll("rooms");
   const dataProvider = useDataProvider();
+  const getErrorMessage = (error: unknown) => {
+    if (error && typeof error === "object") {
+      const e = error as {
+        body?: { error?: string; errcode?: string };
+        message?: string;
+        status?: number;
+      };
+      if (e.body?.error) {
+        return e.body.errcode ? `${e.body.errcode}: ${e.body.error}` : e.body.error;
+      }
+      if (e.message) return e.message;
+      if (e.status) return `HTTP ${e.status}`;
+    }
+    return String(error);
+  };
   const { mutate, isPending } = useMutation({
     mutationFn: () =>
       dataProvider.createMany("room_directory", {
@@ -81,8 +96,8 @@ export const RoomDirectoryBulkPublishButton = (props: ButtonProps) => {
       unselectAllRooms();
       refresh();
     },
-    onError: () =>
-      notify("resources.room_directory.action.send_failure", {
+    onError: (error: unknown) =>
+      notify(getErrorMessage(error), {
         type: "error",
       }),
   });
@@ -99,6 +114,21 @@ export const RoomDirectoryPublishButton = (props: ButtonProps) => {
   const notify = useNotify();
   const refresh = useRefresh();
   const [create, { isLoading }] = useCreate();
+  const getErrorMessage = (error: unknown) => {
+    if (error && typeof error === "object") {
+      const e = error as {
+        body?: { error?: string; errcode?: string };
+        message?: string;
+        status?: number;
+      };
+      if (e.body?.error) {
+        return e.body.errcode ? `${e.body.errcode}: ${e.body.error}` : e.body.error;
+      }
+      if (e.message) return e.message;
+      if (e.status) return `HTTP ${e.status}`;
+    }
+    return String(error);
+  };
 
   if (!record) {
     return;
@@ -113,8 +143,8 @@ export const RoomDirectoryPublishButton = (props: ButtonProps) => {
           notify("resources.room_directory.action.send_success");
           refresh();
         },
-        onError: () =>
-          notify("resources.room_directory.action.send_failure", {
+        onError: (error: unknown) =>
+          notify(getErrorMessage(error), {
             type: "error",
           }),
       }

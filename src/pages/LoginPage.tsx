@@ -99,6 +99,13 @@ const LoginPage = () => {
   const [ssoBaseUrl, setSSOBaseUrl] = useState("");
   const loginToken = /\?loginToken=([a-zA-Z0-9_-]+)/.exec(window.location.href);
 
+  useEffect(() => {
+    if (locales.length === 0) return;
+    if (!locales.some(l => l.locale === locale)) {
+      setLocale(locales[0].locale);
+    }
+  }, [locale, locales, setLocale]);
+
   if (loginToken) {
     const ssoToken = loginToken[1];
     // Prevent further requests

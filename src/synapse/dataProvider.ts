@@ -428,12 +428,12 @@ const resourceMap = {
     data: "chunk",
     total: json => json.total_room_count_estimate,
     create: (params: RaRecord) => ({
-      endpoint: `/_matrix/client/r0/directory/list/room/${params.id}`,
+      endpoint: `/_matrix/client/r0/directory/list/room/${encodeURIComponent(String(params.id))}`,
       body: { visibility: "public" },
       method: "PUT",
     }),
     delete: (params: DeleteParams) => ({
-      endpoint: `/_matrix/client/r0/directory/list/room/${params.id}`,
+      endpoint: `/_matrix/client/r0/directory/list/room/${encodeURIComponent(String(params.id))}`,
       body: { visibility: "private" },
       method: "PUT",
     }),
@@ -628,7 +628,11 @@ const dataProvider: SynapseDataProvider = {
       method: create.method,
       body: JSON.stringify(create.body, filterNullValues),
     });
-    return { data: res.map(json) };
+    const mapped = res.map(json);
+    if (mapped?.id === undefined && params?.data?.id !== undefined) {
+      return { data: { ...mapped, id: params.data.id } };
+    }
+    return { data: mapped };
   },
 
   createMany: async (resource: string, params: { ids: Identifier[]; data: RaRecord }) => {
@@ -649,7 +653,15 @@ const dataProvider: SynapseDataProvider = {
         });
       })
     );
-    return { data: responses.map(({ json }) => json) };
+    return {
+      data: responses.map(({ json }, index) => {
+        const mapped = res.map(json);
+        if (mapped?.id === undefined) {
+          return { ...mapped, id: params.ids[index] };
+        }
+        return mapped;
+      }),
+    };
   },
 
   delete: async (resource, params) => {
